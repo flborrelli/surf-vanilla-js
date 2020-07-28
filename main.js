@@ -1,4 +1,4 @@
-const initTabNav = () =>{
+function initTabNav(){
   const tabMenu = document.querySelectorAll('.js-tabmenu li');
   const tabContent = document.querySelectorAll('.js-tabcontent section');
   const tabImg = document.querySelectorAll('.js-tabmenu li img');
@@ -33,14 +33,75 @@ const initTabNav = () =>{
 }
 initTabNav();
 
-const accordionList = document.querySelectorAll('.js-accordion dt');
+function initAccordion(){
+  const accordionList = document.querySelectorAll('.js-accordion dt');
+  const activeClass = 'ativo';
 
-
-function activeAccordion(){
-  this.classList.toggle('ativo')
-  this.nextElementSibling.classList.toggle('ativo');
+  if(accordionList.length){
+    //Usamos o nextElementSibling para pegar o DD - próximo elemento depois do DT
+    accordionList[0].nextElementSibling.classList.add(activeClass)
+    
+    function activeAccordion(){
+      this.classList.toggle(activeClass)
+      this.nextElementSibling.classList.toggle(activeClass);
+    }
+    
+    accordionList.forEach(item => {
+      item.addEventListener('click', activeAccordion);
+    })
+  }
 }
+initAccordion();
 
-accordionList.forEach(item => {
-  item.addEventListener('click', activeAccordion);
-})
+function initSmoothScroll(){
+  const linksInternos = document.querySelectorAll('.js-menu a[href^="#"]');
+  
+  function scrollToSection(event) {
+    event.preventDefault();
+    //selecionando o href dos botões do menu (que são iguais aos IDs)
+    const href = event.currentTarget.getAttribute('href');
+    //selecionando a seçao pelo id
+    const section = document.querySelector(href)
+    section.scrollIntoView({
+      block: "start", 
+      behavior: "smooth"
+    })
+  
+  
+    //FORMA ALTERNATIVA Podemos passar x, y ou options - objeto que recebe top e behavior como propriedades.
+    // const topOfSection = section.offsetTop;
+    // window.scrollTo({
+    //   top: topOfSection,
+    //   behavior: 'smooth',
+    // })
+  }
+  
+  linksInternos.forEach(link => {
+    link.addEventListener('click', scrollToSection)
+  })
+}
+initSmoothScroll();
+
+const sections = document.querySelectorAll('.js-scroll');
+
+function initScrollAnimation(){
+  if(sections.length){
+    const windowHalf = window.innerHeight * 0.6;
+    
+    function scrollAnimation(){
+      sections.forEach(section => {
+        const sectionTop = section.getBoundingClientRect().top;
+        const isSectionVisible = (sectionTop - windowHalf) < 0;
+        if(isSectionVisible){
+          section.classList.add('ativo')
+        } else {
+          section.classList.remove('ativo') //Retirar a classe para animar novamente após o user descer o scroll
+    
+        }
+      })
+    }
+    scrollAnimation() //Animar o site assim que o usuário entrar
+    window.addEventListener('scroll', scrollAnimation); //Animar no scroll
+  }
+}
+initScrollAnimation();
