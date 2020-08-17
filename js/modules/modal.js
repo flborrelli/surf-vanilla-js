@@ -20,3 +20,5 @@ export default function initModal(){
   containerModal.addEventListener('click', outModalClick);
   }
 }
+
+
