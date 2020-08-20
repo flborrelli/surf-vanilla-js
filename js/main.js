@@ -5,6 +5,8 @@ import initTabNav from './modules/tabnav.js';
 import initModal from './modules/modal.js';
 import initTooltip from './modules/tooltip.js';
 import initDropdownMenu from './modules/dropdown-menu.js';
+import initMenuMobile from './modules/menu-mobile.js';
+import initAnimaNumeros from './modules/anima-numeros.js';
 
 //Função importada do module tabnav.js
 initTabNav();
@@ -20,3 +22,7 @@ initModal();
 initTooltip();
 //Função importada do modulo dropdown-menu.js
 initDropdownMenu();
+//Função importada do modulo menu-mobile.js
+initMenuMobile();
+
+initAnimaNumeros();

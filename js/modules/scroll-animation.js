@@ -10,8 +10,8 @@ export default function initScrollAnimation(){
         const isSectionVisible = (sectionTop - windowHalf) < 0;
         if(isSectionVisible){
           section.classList.add('ativo')
-        } else {
-          section.classList.remove('ativo') //Retirar a classe para animar novamente após o user descer o scroll
+        } else if(section.classList.contains('ativo')) {
+          section.classList.remove('ativo') //Retirar a classe para animar novamente após o user descer o scroll (somente remover se já conter ativo)
     
         }
       })
