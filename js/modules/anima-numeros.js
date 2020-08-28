@@ -32,3 +32,4 @@ export default function initAnimaNumeros() {
   observer.observe(observerTarget, {attributes: true})
 }
 
+
